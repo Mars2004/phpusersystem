@@ -19,6 +19,7 @@ Download and install all dependencies:
 
 
 ## Usage
+This is very simple application with one form (page) where new users can be added to database. Just visit [http://localhost:8000](http://localhost:8000) and try to add some user to database (host and port migth be different).
 
 ### REST Api Service
 Threre is also a REST Api Service with this end points (host and port migth be different):
