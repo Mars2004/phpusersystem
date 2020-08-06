@@ -4,6 +4,7 @@
  - [Installation](#installation)
   - [Usage](#usage)
 	  - [REST Api Service](#rest-api-service)
+- [Possible Improvements](#possible-improvements)
 
 
 User System in PHP is testing project of PHP with framework [Symfony](https://symfony.com/). User System was developed and tested on Xampp 7.4.6 and its PHP 7.4.6 version on Windows 10.
@@ -32,3 +33,7 @@ This is very simple application with one form (page) where new users can be adde
 Threre is also a REST Api Service with these end points (host and port migth be different):
 - [http://localhost:8000/api/users/list](http://localhost:8000/api/users/list) - to get list of all registered users in database.
 - [http://localhost:8000/api/users/add](http://localhost:8000/api/users/add) - to create new user. This is PUT method, consider using Postman or some other tool to execute it (it won't work in a browser).
+
+## Possible Improvements
+- Column "Rights" of database table "User" looks like user role -> new table "User Roles" and each user can have one or more roles.
+- "Add User Form" should call PUT method of REST Api at [http://localhost:8000/api/users/add](http://localhost:8000/api/users/add).
