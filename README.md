@@ -19,3 +19,8 @@ Download and install all dependencies:
 
 
 ## Usage
+
+### REST Api Service
+Threre is also a REST Api Service with this end points (host and port migth be different):
+- [http://localhost:8000/api/users/list](http://localhost:8000/api/users/list) - to get list of all registered users in database.
+- [http://localhost:8000/api/users/add](http://localhost:8000/api/users/add) - to create new user. This is PUT method, consider using Postman or some other tool to execute it (it won't work in a browser).
