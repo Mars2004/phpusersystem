@@ -18,6 +18,8 @@ Download and install all dependencies:
 - Download and install all [dependencies](#dependencies).
 - Clone this repository.
 - Run command line or bash and open directory in which is repository cloned to.
+- Install project packages by command:
+	- composer install
 - Create database by command:
 	- php bin/console doctrine:database:create (creates SQLite database <repo_dir>/var/data.db)
 - Initialize database by command:
