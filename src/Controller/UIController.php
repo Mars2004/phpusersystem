@@ -18,16 +18,13 @@ class UIController extends AbstractController
     public function AddUserForm(Request $request, ValidatorInterface $validator): Response
     {
       //create Add User Form
-      $form = $this->createForm(UserType::class/*, null,
-      [
-        "action" => $this->generateUrl("api_add_user"),
-        "method" => "PUT"
-      ]*/);
+      $form = $this->createForm(UserType::class);
 
       //common pattern of processing Symfony forms
       $form->handleRequest($request);
       if ($form->isSubmitted() && $form->isValid())
       {
+          //form is submitted and valid -> get and se data
           $newUser = $form->getData();
 
           //get Doctrine entity manager
@@ -37,14 +34,21 @@ class UIController extends AbstractController
           $errors = $validator->validate($newUser);
           if (count($errors) > 0)
           {
-            //new user is not valid -> return response with validation errors
-            return new Response((string) $errors, 400);
+            //display error message
+            $this->addFlash("error", "The received user is not valid: " . json_encode($errors));
+
+            //redirect back to empty "Add User Form"
+            return $this->redirectToRoute("add_user");
           }
 
           //execute and insert to database
           $entityManager->persist($newUser);
           $entityManager->flush();
 
+          //display succes message
+          $this->addFlash("notice", "Your changes were saved!");
+
+          //redirect back to empty "Add User Form"
           return $this->redirectToRoute("add_user");
       }
 

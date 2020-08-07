@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 
 class RESTApiController extends AbstractController
@@ -21,12 +22,18 @@ class RESTApiController extends AbstractController
       //get Doctrine entity manager
       $entityManager = $this->getDoctrine()->getManager();
 
+      $query = $request->query;
+      if (!$query->get("name") || !$query->get("password") || !$query->get("email") || !$query->get("rights"))
+      {
+        throw new BadRequestHttpException("Received user data are not valid!");
+      }
+
       //create new user
       $newUser = new User();
-      $newUser->setName($request->query->get("name"));
-      $newUser->setPassword($request->query->get("password"));
-      $newUser->setEmail($request->query->get("email"));
-      $newUser->setRights($request->query->get("rights"));
+      $newUser->setName($query->get("name"));
+      $newUser->setPassword($query->get("password"));
+      $newUser->setEmail($query->get("email"));
+      $newUser->setRights($query->get("rights"));
 
       //validate new user
       $errors = $validator->validate($newUser);
@@ -54,8 +61,8 @@ class RESTApiController extends AbstractController
       $users = $repository->findAll();
 
       //serialize users to JSON
-      $serializer = $this->container->get('serializer');
-      $usersJSON = $serializer->serialize($users, 'json');
+      $serializer = $this->container->get("serializer");
+      $usersJSON = $serializer->serialize($users, "json");
 
       //return response with users as JSON
       return new Response($usersJSON);

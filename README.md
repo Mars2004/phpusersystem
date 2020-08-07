@@ -37,3 +37,4 @@ Threre is also a REST Api Service with these end points (host and port migth be 
 ## Possible Improvements
 - Column "Rights" of database table "User" looks like user role -> new table "User Roles" and each user can have one or more roles.
 - "Add User Form" should call PUT method of REST Api at [http://localhost:8000/api/users/add](http://localhost:8000/api/users/add).
+- Better "Add User Form" design.

@@ -21,6 +21,18 @@
                 <h3 class="text-center">Add new user</h3>
             
                 {{ form(form) }}
+
+                {% for message in app.flashes('notice') %}
+                    <div class="flash-notice alert alert-success text-center" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% for message in app.flashes('error') %}
+                    <div class="flash-notice alert alert-success text-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             </div>
         {% endblock %}
         {% block javascripts %}{% endblock %}
